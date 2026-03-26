@@ -17,7 +17,21 @@ describe('Formulário de Consultoria', () => {
         cy.contains('label', 'Tipo de Consultoria')
             .parent()
             .find('select')
-            .select('In Company');
+            .select('Individual');
 
+        // Interagindo com multipla escolha
+        cy.contains('label', 'Pessoa Física')
+            .find('input')
+            .check(); // ou da pra usar o .click()
+
+        cy.contains('label', 'Pessoa Jurídica')
+            .find('input')
+            .should('be.not.checked'); // Esse evento é uma dupla verificação pra garantir que a segunda opção (Pessoa jurídica) não será selecionada.
+
+        cy.contains('label', 'CPF')
+            .parent()
+            .find('input')
+            .type('12883424705')
+            .should('have.value', '128.834.247-05');
     })
 })
